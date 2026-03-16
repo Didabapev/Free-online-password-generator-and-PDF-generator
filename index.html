@@ -1,118 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Free Online Password Generator & PDF Generator</title>
-<meta name="description" content="Free online password generator and PDF generator. Create strong secure passwords and download PDF files instantly. No registration required.">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Generator – Create Strong Passwords Online 2026</title>
+    <meta name="description" content="Generate strong, secure passwords instantly with our free online tool. Customizable length, symbols, and numbers. 100% private and secure.">
+    
+    <style>
+        :root {
+            --primary: #8b5cf6; /* Violet */
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --accent: #10b981;
+        }
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background:#f5f7fa;
-  margin:0;
-  padding:0;
-}
-.container {
-  max-width:600px;
-  margin:40px auto;
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
-h1 {
-  text-align:center;
-}
-button {
-  padding:10px 15px;
-  border:none;
-  background:#2563eb;
-  color:#fff;
-  border-radius:6px;
-  cursor:pointer;
-}
-button:hover {
-  background:#1e40af;
-}
-input, textarea {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
-.footer {
-  text-align:center;
-  margin-top:20px;
-  font-size:14px;
-}
-.footer a {
-  color:#2563eb;
-  text-decoration:none;
-}
-</style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: var(--card);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; color: var(--primary); }
+
+        .result-box {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary);
+        }
+
+        #passwordOutput { font-family: monospace; font-size: 1.2rem; word-break: break-all; color: var(--accent); }
+
+        .btn-copy { background: transparent; border: none; color: var(--primary); cursor: pointer; font-weight: 600; }
+
+        .setting { display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center; }
+
+        input[type="range"] { width: 100%; margin: 10px 0; accent-color: var(--primary); }
+
+        .btn-generate {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-generate:hover { opacity: 0.9; transform: scale(0.98); }
+
+        .seo-text { margin-top: 30px; font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+    </style>
 </head>
-
 <body>
+
 <div class="container">
-  <h1>🔐 Password Generator</h1>
+    <h1>Password Generator</h1>
+    
+    <div class="result-box">
+        <span id="passwordOutput">P@ssw0rd123!</span>
+        <button class="btn-copy" onclick="copyToClipboard()">COPY</button>
+    </div>
 
-  <label>Password length</label>
-  <input type="number" id="length" value="12" min="6" max="32">
+    <div class="setting">
+        <span>Length: <b id="lengthVal">12</b></span>
+        <input type="range" id="length" min="6" max="32" value="12" oninput="document.getElementById('lengthVal').innerText = this.value">
+    </div>
 
-  <button onclick="generatePassword()">Generate Password</button>
+    <div class="setting">
+        <label>Include Numbers</label>
+        <input type="checkbox" id="numbers" checked>
+    </div>
 
-  <input type="text" id="password" readonly>
-  <button onclick="copyPassword()">Copy</button>
+    <div class="setting">
+        <label>Include Symbols</label>
+        <input type="checkbox" id="symbols" checked>
+    </div>
 
-  <hr>
+    <button class="btn-generate" onclick="generate()">Generate Password</button>
 
-  <h2>📄 PDF Generator</h2>
-  <textarea id="pdfText" rows="4" placeholder="Enter text for PDF (password, notes, etc)"></textarea>
-  <button onclick="generatePDF()">Download PDF</button>
-  <!-- SEO TEXT START -->
-  <section>
-    <h2>Free Online Password and PDF Generator</h2>
-    <p>
-      This free online password generator helps you create strong and secure passwords instantly.
-      You can choose password length and generate random combinations of letters, numbers, and symbols.
-      The PDF generator allows you to save passwords or notes as a downloadable PDF file.
-      All tools work directly in your browser with no data collection and no registration required.
-    </p>
-  </section>
-  <!-- SEO TEXT END -->
-
-  <div class="footer">
-    <a href="privacy.html">Privacy Policy</a>
-  </div>
+    <div class="seo-text">
+        <p><strong>Why use a strong password?</strong> A strong password protects your personal data from hackers. Our tool generates random sequences that are impossible to guess. All generation happens 100% locally in your browser.</p>
+    </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <script>
-function generatePassword() {
-  const length = document.getElementById("length").value;
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-  let pass = "";
-  for (let i = 0; i < length; i++) {
-    pass += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  document.getElementById("password").value = pass;
-}
+    function generate() {
+        const length = document.getElementById('length').value;
+        const useNumbers = document.getElementById('numbers').checked;
+        const useSymbols = document.getElementById('symbols').checked;
+        
+        let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (useNumbers) charset += "0123456789";
+        if (useSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+        
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            password += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        document.getElementById('passwordOutput').innerText = password;
+    }
 
-function copyPassword() {
-  const pass = document.getElementById("password");
-  pass.select();
-  document.execCommand("copy");
-  alert("Password copied!");
-}
-
-function generatePDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  const text = document.getElementById("pdfText").value || "Generated by Password & PDF Tool";
-  doc.text(text, 10, 20);
-  doc.save("generated.pdf");
-}
+    function copyToClipboard() {
+        const text = document.getElementById('passwordOutput').innerText;
+        navigator.clipboard.writeText(text);
+        alert("Password copied!");
+    }
+    
+    generate(); // Init
 </script>
 </body>
 </html>
